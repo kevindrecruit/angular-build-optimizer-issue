@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { container } from './inversify.config';
+import { MyOtherClass } from './myOtherClass';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-build-optimizer-issue';
+  public title: string;
+
+  constructor () {
+    const myOtherClass = container.get<MyOtherClass>(MyOtherClass);
+    this.title = myOtherClass.name;
+  }
 }
